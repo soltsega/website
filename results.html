@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Results</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .results-container { max-width: 600px; margin: auto; }
+    h1 { text-align: center; }
+    .score { font-size: 1.5em; margin: 20px 0; text-align: center; }
+    .summary { background: #f9f9f9; padding: 15px; border-radius: 8px; }
+    .summary p { margin: 10px 0; }
+    button { display: block; margin: 30px auto; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="results-container">
+    <h1>Your Quiz Results</h1>
+    <div class="score" id="scoreDisplay">You scored 0 out of 3</div>
+
+    <div class="summary" id="summaryDisplay">
+      <p><strong>Question 1:</strong> What is the capital of France?<br>
+      <em>Your answer:</em> Paris ✅</p>
+
+      <p><strong>Question 2:</strong> Which language is primarily spoken in Brazil?<br>
+      <em>Your answer:</em> Spanish ❌ (Correct: Portuguese)</p>
+
+      <p><strong>Question 3:</strong> What is 2 + 2?<br>
+      <em>Your answer:</em> 4 ✅</p>
+    </div>
+
+    <button onclick="window.location.href='Quizzes.html'">Try Again</button>
+  </div>
+
+  <script>
+    // Example dynamic score update (can be replaced with actual logic)
+    const correctAnswers = 2;
+    const totalQuestions = 3;
+    document.getElementById('scoreDisplay').textContent = `You scored ${correctAnswers} out of ${totalQuestions}`;
+  </script>
+
+</body>
+</html>

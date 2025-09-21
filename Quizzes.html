@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- yugvyg -->
+  <title>Enhanced Quiz System</title>
+  <style>
+    
+    .question { display: none; 
+      margin: 40px 20px; 
+      padding: 15px; 
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+      text-align: left;
+      font-size: 1.1em;
+      line-height: 1.6;
+
+    }
+
+
+    button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+    .question.active { display: block; }
+    .feedback { font-weight: bold; margin-top: 10px; }
+  li{
+    display: inline;
+    margin-right: 10px;
+    list-style-type: none;
+    padding: 0;
+
+  }
+
+  a{
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 1em;
+  }
+
+          footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 0.9em;
+        color: #555;
+        }
+</style>
+</head>
+<body>
+
+    <header>
+<a href="index.html"><img src="logo.png" alt="Logo" style="height:50px;"></a>
+
+
+
+
+      <nav>
+  <ul>
+    <li><a href="home.html">Home</a></li>
+    <li><a href="start quiz.html">Start Quiz</a></li>
+    <li><a href="instructions.html">Instructions</a></li>
+    <li><a href="results.html">Results</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+    <h1>Quiz System</h1>
+    <p>Test your knowledge with the following questions!</p>
+</nav>
+    </header>
+    <main>
+  <div id="quiz">
+    <div class="question active">
+      <p>1. What is the capital of France?</p>
+      <input type="radio" name="q1" value="Paris"> Paris<br>
+      <input type="radio" name="q1" value="London"> London<br>
+      <input type="radio" name="q1" value="Berlin"> Berlin<br>
+    </div>
+
+    <div class="question">
+      <p>2. Which language is primarily spoken in Brazil?</p>
+      <input type="radio" name="q2" value="Spanish"> Spanish<br>
+      <input type="radio" name="q2" value="Portuguese"> Portuguese<br>
+      <input type="radio" name="q2" value="French"> French<br>
+    </div>
+
+    <div class="question">
+      <p>3. What is 2 + 2?</p>
+      <input type="radio" name="q3" value="3"> 3<br>
+      <input type="radio" name="q3" value="4"> 4<br>
+      <input type="radio" name="q3" value="5"> 5<br>
+    </div>
+
+    <button onclick="prevQuestion()">Back</button>
+    <button onclick="nextQuestion()">Next</button>
+    <button onclick="checkAnswers()">Check</button>
+
+    <div id="result" class="feedback"></div>
+  </div>
+
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Quiz System. All rights reserved.</p>
+  </footer>
+  <script>
+    const questions = document.querySelectorAll('.question');
+    let current = 0;
+
+    function showQuestion(index) {
+      questions.forEach((q, i) => {  //what are q and i here?
+                                    // q represents each question element, and i is its index in the NodeList
+        q.classList.toggle('active', i === index); //what is this toggle function doing?
+                                                    // It adds the 'active' class to the question at the current index and removes it from others
+      });
+    }
+
+    function nextQuestion() {
+      if (current < questions.length - 1) {
+        current++;
+        showQuestion(current);
+      }
+    }
+
+    function prevQuestion() {
+      if (current > 0) {
+        current--;
+        showQuestion(current);
+      }
+
+   
+
+      //to remove the back button on the first question
+      //to remove the next button on the last question
+      if (current === 0) {
+        document.querySelector('button[onclick="prevQuestion()"]').style.display = 'none';
+      } else {
+        document.querySelector('button[onclick="prevQuestion()"]').style.display = 'inline-block';
+      }
+    }
+
+    function checkAnswers() {
+      const answers = {
+        q1: 'Paris',
+        q2: 'Portuguese',
+        q3: '4'
+      };
+      let score = 0;
+      for (let key in answers) {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+          score++;
+        }
+      }
+      const result = document.getElementById('result');
+      result.textContent = `You scored ${score} out of ${questions.length}`;
+    }
+  </script>
+
+</body>
+</html>
